@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Recipe | Vege</title>
+<style>
+body { font-family:"Poppins",sans-serif; background:#f3f9f6;
+       display:flex; justify-content:center; padding:40px; }
+.card {
+  background:#fff; padding:2rem; border-radius:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,0.08); width:100%; max-width:500px;
+}
+input, textarea {
+  width:100%; padding:10px 12px; border:1px solid #cce3de;
+  border-radius:8px; margin-bottom:14px; font-size:15px;
+}
+button {
+  width:100%; padding:12px; border:none;
+  background:#40916c; color:white; border-radius:8px;
+  font-size:16px; cursor:pointer;
+}
+button:hover { background:#2d6a4f; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h3 style="text-align:center;color:#2d6a4f;">✏️ Edit Recipe</h3>
+
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="receipe_name"
+           value="{{ recipe.receipe_name }}" required>
+    <textarea name="receipe_description" rows="4">{{ recipe.receipe_description }}</textarea>
+
+    <label>Current Image:</label><br>
+    <img src="{{ recipe.receipe_image.url }}" width="180" style="border-radius:8px;"><br><br>
+
+    <label>Change Image:</label>
+    <input type="file" name="receipe_image"><br><br>
+
+    <button type="submit">Update Recipe</button>
+  </form>
+
+  <p style="text-align:center; margin-top:15px;">
+    <a href="{% url 'recipes' %}" style="color:#40916c;">⬅ Back to Recipes</a>
+  </p>
+</div>
+</body>
+</html>
